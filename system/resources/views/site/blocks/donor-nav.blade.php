@@ -18,6 +18,7 @@
                 </ul>
            
            <ul class="nav ml-auto">
+                @if(is_null(Auth::user()->donors()->first()) && Auth::user()->donors()->first()->milkkits()->count() > 0)
                 <li class="nav-item mr-2">
                     <a href="{{Route('milkkit_send')}}" class="nav-link">Request Milk Kit</a>
                 </li>
@@ -25,6 +26,8 @@
                  <li class="nav-item mr-2">
                     <a href="{{Route('milkkit_send')}}" class="nav-link">Request Milk Kit</a>
                 </li>
+
+                @endif
                 
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('logout') }}"
