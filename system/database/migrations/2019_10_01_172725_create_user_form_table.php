@@ -17,6 +17,7 @@ class CreateUserFormTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('form_id');
+            $table->string('action');
             $table->timestamps();
         });
     }

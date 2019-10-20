@@ -134,14 +134,7 @@ class MenuSeeder extends Seeder
         $menuItem->permissions()->attach(Permission::where('name', 'admin')->first());
         $menuItem->permissions()->attach(Permission::where('name', 'manager')->first());
 
-        $menuItem = new MenuItem();
-        $menuItem->menu_id = $menu->id;
-        $menuItem->name = "Forms";
-        $menuItem->path = '/forms';
-        $menuItem->save();
-        $menuItem->permissions()->attach(Permission::where('name', 'donor')->first());
-        $menuItem->permissions()->attach(Permission::where('name', 'admin')->first());
-        $menuItem->permissions()->attach(Permission::where('name', 'manager')->first());
+       
 
         
 

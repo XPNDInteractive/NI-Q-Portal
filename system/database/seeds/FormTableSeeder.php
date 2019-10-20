@@ -12,6 +12,7 @@ use App\FormQuestionMap;
 use App\QuestionCondition;
 use App\QuestionConditionType;
 use App\QuestionConditionAction;
+use App\User;
 
 class FormTableSeeder extends Seeder
 {
@@ -27,6 +28,7 @@ class FormTableSeeder extends Seeder
         $form->name = "Donor Application";
         $form->active = true;
         $form->save();
+        $form->users()->attach(User::where('email', 'jgetner@gmail.com')->first()->id, ['action' => 'notify']);
 
         
         $question = new Question();
@@ -1507,8 +1509,53 @@ class FormTableSeeder extends Seeder
         $field->validations()->attach(QuestionFieldValidation::where('name', 'required')->first()->id);
 
 
+
+
         $form = new Form();
-        $form->form_type_id = FormType::where('name', 'public')->first()->id;
+        $form->form_type_id = FormType::where('name', 'donor')->first()->id;
+        $form->name = "Consent Form";
+        $form->active = true;
+        $form->save();
+
+        $question = new Question();
+        $question->form_id = $form->id;
+        $question->question = "<h5>Please Download & Sign Our Consent Form</h5>";
+        $question->active = true;
+        $question->save();
+
+        $field = new QuestionField();
+        $field->question_id = $question->id;
+        $field->question_field_type_id = QuestionFieldType::where('name', 'file download')->first()->id;
+        $field->name = "consent_form";
+        $field->label = "consent_form";
+        $field->options = NULL;
+        $field->download = 'form/[10-15-19] Ni-Q Consent Form.docx';
+        $field->save();
+        
+
+       
+        $question = new Question();
+        $question->form_id = $form->id;
+        $question->question = "<h5>Please upload your signed consent form</h5>";
+        $question->active = true;
+        $question->save();
+
+        $field = new QuestionField();
+        $field->question_id = $question->id;
+        $field->question_field_type_id = QuestionFieldType::where('name', 'file upload')->first()->id;
+        $field->name = "consent_form";
+        $field->label = "consent_form";
+        $field->options = NULL;
+        $field->download = NULL;
+        $field->save();
+        $field->validations()->attach(QuestionFieldValidation::where('name', 'required')->first()->id);
+        $field->validations()->attach(QuestionFieldValidation::where('name', 'file')->first()->id, ['value' => 'doc,docx']);
+
+
+
+
+        $form = new Form();
+        $form->form_type_id = FormType::where('name', 'donor')->first()->id;
         $form->name = "Direct Deposit Form";
         $form->active = true;
         $form->save();
@@ -1539,6 +1586,9 @@ class FormTableSeeder extends Seeder
         $field->download = NULL;
         $field->save();
         $field->validations()->attach(QuestionFieldValidation::where('name', 'required')->first()->id);
+
+
+        
        
     }
 }

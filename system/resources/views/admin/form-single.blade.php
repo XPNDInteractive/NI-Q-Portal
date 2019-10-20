@@ -59,14 +59,14 @@
                        
                     </div>
 
-                    @if($data_item->users()->count() > 0)
+                    @if($data_item->users()->where('action', 'assign')->count() > 0)
                      <div class="col-12">
                         <div class="bg-light border p-3 border-bottom-0">
                             <p>Assigned Users</p>
                         </div>
                         <table class="table bg-white border-left border-right">
                             <tbody>
-                                @foreach($data_item->users()->get() as $val)
+                                @foreach($data_item->users()->where('action', 'assign')->get() as $val)
                                 
                                     <tr>
                                         <td>{{$val->first_name}}, {{$val->last_name}}</td>

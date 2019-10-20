@@ -336,9 +336,17 @@ class DonorFormController extends Controller
 
             $notify = new \App\Notifications();
             $notify->notification_type_id = \App\NotificationTypes::where('name', 'form submission')->first()->id;
-            $notify->message = 'New Donor Application Submission!';
-            $notify->resource = Route('admin.forms.submissions');
+            $notify->message = 'There is a new ' . $form->name . ' submission!';
+            $notify->resource = '/admin/forms/submissions/submission?form='.$form->name.'&id=' . $fs->id;
             $notify->save();
+
+            dd($form->users()->where('action', 'notify')->get());
+            
+            foreach($form->users()->where('action', 'notify')->get() as $user)
+            {
+                $notify->users()->attach($user->id);
+            }
+            
 
             return redirect('/form/thankyou');
         }

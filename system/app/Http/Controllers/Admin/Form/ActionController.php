@@ -58,14 +58,21 @@ class ActionController extends Controller
 
             if(!is_null($request->input('users'))){
                 foreach($request->input('users') as $key => $value){
-                    $user->users()->attach(User::where('id', $key)->first());
+                    $user->users()->attach(User::where('id', $key)->first(), ['action' =>'assign']);
+                }
+            }
+
+
+            if(!is_null($request->input('notify'))){
+                foreach($request->input('notify') as $key => $value){
+                    $user->users()->attach(User::where('id', $key)->first(), ['action' => 'notify']);
                 }
             }
             
             
            
 
-            return redirect()->route('admin.forms.questions', ['id' => $user->id]);
+            return redirect()->route('admin.form', ['id' => $user->id]);
         }
 
     }
@@ -94,9 +101,10 @@ class ActionController extends Controller
 
             $users = [];
 
+            
             if(!is_null($request->input('donors'))){
                 foreach($request->input('donors') as $key => $value){
-                    $users[] = $key;
+                    $users[] = ['user_id' => $key, 'action' => 'assign'];
 
                     $notify = new Notifications();
                     $notify->notification_type_id = NotificationTypes::where('name', 'Form Assigned')->first()->id;
@@ -105,11 +113,22 @@ class ActionController extends Controller
                     $notify->save();
                     $notify->users()->attach($key);
                 }
+
+                
+               
             }
            
-            
+            $notify = [];
+            if(!is_null($request->input('notify'))){
+                foreach($request->input('notify') as $key => $value){
+                    
+                    $users[] = ['user_id' => $key, 'action' => 'notify'];
+                }
+            }
 
             $user->users()->sync($users);
+
+           
 
            
             return redirect()->route('admin.form', ['id' => $user->id])->with('success', "Form $user->name successfully updated");

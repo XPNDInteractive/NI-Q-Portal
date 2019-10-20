@@ -144,6 +144,8 @@ class ViewController extends Controller
             'rows' => $form->questions()->get()
         ];
 
+        $page['forms'] = Form::all();
+
 
         $page['form_action_route'] = 'admin.forms.questions.save';
         $page['update_route'] = Route('admin.form.update');
@@ -310,7 +312,7 @@ class ViewController extends Controller
             return redirect()->back();
         }
 
-        $submission = FormSubmission::where('id', $request->query('submission'))->first();
+        $submission = FormSubmission::where('id', $request->input('submission'))->first();
 
         if(is_null($submission)){
             return redirect()->back()->with('errors', "Submission not found!");
@@ -364,10 +366,29 @@ class ViewController extends Controller
             
         }
 
+
+       
         $submission->user_id->permissions()->attach(Permission::where('name', 'Donor')->first()->id);
-        $submission->user_id->forms()->attach(Form::where('name', 'Direct Deposit Form')->first()->id);
+        
         $submission->is_new = false;
         $submission->update();
+       
+        if($request->has('forms')){
+            foreach($request->input('forms') as $formId => $status){
+           
+                $_form = Form::where('id', $formId)->first();
+                $submission->user_id->forms()->attach($_form->id);
+                
+                $user = new \App\Notifications();
+                $user->notification_type_id = \App\NotificationTypes::where('name', 'Form Assigned')->first()->id;
+                $user->message = 'You have been assigned form: ' . $_form->name;
+                $user->resource = '/donor/form';
+                $user->save();
+                $user->users()->attach($submission->user_id->id);
+            }
+        }
+        
+        
 
         $user = new \App\Notifications();
         $user->notification_type_id = \App\NotificationTypes::where('name', 'Donor Approved')->first()->id;
@@ -376,15 +397,10 @@ class ViewController extends Controller
         $user->save();
         $user->users()->attach($submission->user_id->id);
 
-        $user = new \App\Notifications();
-        $user->notification_type_id = \App\NotificationTypes::where('name', 'Form Assigned')->first()->id;
-        $user->message = 'Please complete the direct deposit form';
-        $user->resource = '/donor/form';
-        $user->save();
-        $user->users()->attach($submission->user_id->id);
+       
 
         
 
-        return redirect('/admin/forms/submissions?id='. $form->id)->with('success', 'Donor successfully added');
+        return redirect('/admin/forms/form?id='. $submission->form_id)->with('success', 'Submission was processed');
     }
 }

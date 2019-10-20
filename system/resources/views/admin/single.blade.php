@@ -5,6 +5,9 @@
 <div class="bg-light h-100">
      <div class="bg-dark px-3 py-3 row m-0 align-items-center">
         <p class="m-0 text-uppercase text-white" >{!!$title!!} </p>
+        @if(isset($previous))
+        <a class="ml-3 btn btn-primary btn-sm" href="{{$previous}}">Back</a>
+        @endif
         <a href="{{$update_route}}?id={{$data_item->id}}" class="btn btn-warning btn-sm ml-auto mr-1 text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
         <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-trash"></i> Delete</button>
     </div>

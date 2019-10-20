@@ -9,7 +9,9 @@
     </div>
     <div style="height: calc(100% - 51.2px);" class="overflow-auto">
         <div class="container-fluid  p-3 p-md-5">
-            <form class="px-5" method="POST" action="{{Route($form_action_route)}}" enctype="multipart/form-data">
+            <form class="px-5" method="POST" action="/admin/forms/submissions/submission/map" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="submission" value="{{$submission->id}}"/>
                 <div class="p-3 p-md-5 border  bg-white">
                      <div class="row m-0 align-items-center mb-4">
                         <h5 class="m-0 mr-auto">Form Submission</h5>
@@ -91,10 +93,25 @@
                             </div>
                         @endforeach
                     @endif
+
+                    <div class="bg-light border p-5 mb-5">
+                        <input type="search" placeholder="search..." class="form-control mb-2"/>
+                        <div style="max-height: 300px; overflow:auto;" class="select-box border bg-white">
+                            @foreach($forms as $form)
+                                <div class="select-box-item  row m-0 border-bottom p-3">
+                                    <div class="custom-control custom-checkbox ml-2">
+                                        <input name="forms[{{$form->id}}]" type="checkbox" class="custom-control-input" id="{{$form->id}}">
+                                        <label class="custom-control-label" for=""></label>
+                                    </div> 
+                                    <p class="m-0 ml-4">{{$form->name}}</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                    
                     <div class="row m-0 align-items-center mb-4">
                         
-                        <button type="button" class="btn btn-success mr-1 ml-auto" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-thumbs-up"></i> Approve</button>
+                        <button type="submit" class="btn btn-success mr-1 ml-auto"><i class="fas fa-thumbs-up"></i> Approve</button>
                         <a href="#" class="btn btn-danger  mr-1"><i class="fas fa-lock"></i> Deny</a>
                     </div>
                 </div>

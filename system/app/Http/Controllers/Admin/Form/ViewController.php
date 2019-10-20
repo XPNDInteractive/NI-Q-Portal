@@ -114,13 +114,30 @@ class ViewController extends Controller
         $page['fields']['users'] = [
             'name' => 'users',
             'type' => 'checkbox-select',
-            'label' => "Users",
-            'helper' => 'The name you want the page to be titled',
+            'label' => "Assign To Users",
+            'helper' => 'The users you want to assign this form to',
             'options' => []
         ];
 
         foreach(User::all() as $perm){
             $page['fields']['users']['options'][] = [
+                'name' => $perm->name,
+                'value' => $perm->id,
+                'selected' => false
+            ];
+        }
+
+
+        $page['fields']['notify'] = [
+            'name' => 'notify',
+            'type' => 'checkbox-select',
+            'label' => "Notify On Complete",
+            'helper' => 'The users you want notified when the form has been completed',
+            'options' => []
+        ];
+
+        foreach(User::all() as $perm){
+            $page['fields']['notify']['options'][] = [
                 'name' => $perm->name,
                 'value' => $perm->id,
                 'selected' => false
@@ -189,7 +206,7 @@ class ViewController extends Controller
         $page['fields']['donors'] = [
             'name' => 'donors',
             'type' => 'checkbox-select',
-            'label' => "Donors",
+            'label' => "Users Assigned",
             'helper' => 'The name you want the page to be titled',
             'options' => []
         ];
@@ -198,7 +215,23 @@ class ViewController extends Controller
             $page['fields']['donors']['options'][] = [
                 'name' => $perm->name,
                 'value' => $perm->id,
-                'selected' => !is_null($menu->users()->where('user_form.user_id', $perm->id)->first()) ? true:false
+                'selected' => !is_null($menu->users()->where('user_form.user_id', $perm->id)->where('user_form.action', 'assign')->first()) ? true:false
+            ];
+        }
+
+        $page['fields']['notify'] = [
+            'name' => 'notify',
+            'type' => 'checkbox-select',
+            'label' => "Notify Users On Completed",
+            'helper' => 'The name you want the page to be titled',
+            'options' => []
+        ];
+
+        foreach(User::all() as $perm){
+            $page['fields']['notify']['options'][] = [
+                'name' => $perm->name,
+                'value' => $perm->id,
+                'selected' => !is_null($menu->users()->where('user_form.user_id', $perm->id)->where('user_form.action', 'notify')->first()) ? true:false
             ];
         }
 
@@ -222,6 +255,6 @@ class ViewController extends Controller
     public function delete(Request $request){
        $form = Form::where('id', $request->query('id'))->firstOrFail();
        $form->delete();
-       return redirect()->route('admin.form')->with('success', 'Successfully deleted form', $form->name);
+       return redirect()->route('admin.form', ['id' => $form->id])->with('success', 'Successfully deleted form', $form->name);
     }
 }

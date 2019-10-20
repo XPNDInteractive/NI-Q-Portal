@@ -107,7 +107,7 @@ Route::post('/admin/form/update', 'Admin\Form\ActionController@update')->name('a
 //submissions
 Route::get('/admin/forms/submissions', 'Admin\Submission\ViewController@list')->name('admin.forms.submissions');
 Route::get('/admin/forms/submissions/submission', 'Admin\Submission\ViewController@single')->name('admin.forms.submissions.submission');
-Route::get('/admin/forms/submissions/submission/map', 'Admin\Submission\ViewController@map')->name('admin.forms.submissions.submission.map');
+Route::post('/admin/forms/submissions/submission/map', 'Admin\Submission\ViewController@map')->name('admin.forms.submissions.submission.map');
 
 //questions
 Route::get('/admin/forms/questions', 'Admin\Question\ViewController@list')->name('admin.forms.questions');

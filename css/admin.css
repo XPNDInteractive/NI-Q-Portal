@@ -55,7 +55,7 @@ select.form-control{
 
 .custom-control-label::before {
     position: absolute;
-    top: .15rem;
+   
     left: -1.5rem;
     display: block;
     width: 1rem;

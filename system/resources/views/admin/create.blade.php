@@ -108,7 +108,7 @@
                             
                             @if(count($field['options']) > 0)
                             <label>{{$field['label']}}</label>
-                            <div class="bg-light border p-5">
+                            <div class="bg-light border p-5 mb-4">
                                 <input type="search" placeholder="search..." class="form-control mb-2"/>
                                 <div style="max-height: 300px; overflow:auto;" class="select-box border bg-white">
                                     @foreach($field['options'] as $option)

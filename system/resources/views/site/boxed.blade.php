@@ -45,7 +45,7 @@
             </div>
              @endif
              <div class="col-12 row m-0 p-0">
-                @if(isset($request) && !is_null($request->user()->forms()->first()))
+                @if(isset($request) && !is_null($request->user()->forms()->where('action', 'assign')->first()))
                     @foreach ($request->user()->forms()->where('active', true)->get() as $form)
                         
                        

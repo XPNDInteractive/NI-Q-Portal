@@ -84,7 +84,8 @@ class ViewController extends Controller
         
         $page['data_item'] = $results;
 
-       
+        
+        $page['previous'] = '/admin/forms/form?id=' . $results->form_id->id;
         $page['delete_route'] = Route('admin.forms.questions.delete');
         $page['update_route'] = Route('admin.forms.questions.update');
         
