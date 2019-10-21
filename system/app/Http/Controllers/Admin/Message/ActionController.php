@@ -66,7 +66,7 @@ class ActionController extends Controller
     
                     $notify = new Notifications();
                     $notify->notification_type_id = NotificationTypes::where('name', 'Message')->first()->id;
-                    $notify->message = 'There was a new message sent to "'. User::where('id', $key)->first()->name .'"';
+                    $notify->message = 'You have recieved a new message from "'. $request->user()->name .'"';
                     $notify->resource = Route('admin.forms');
                     $notify->save();
                     $notify->users()->attach(User::where('id', $key)->first());
@@ -113,12 +113,17 @@ class ActionController extends Controller
 
             $notify = new Notifications();
             $notify->notification_type_id = NotificationTypes::where('name', 'Message')->first()->id;
-            $notify->message = 'There was a new message sent to "'. $request->input('to') .'"';
+            $notify->message = 'You recieved a reply from "'. $user->from_user_id .'"';
             $notify->resource = Route('admin.forms');
             $notify->save();
             $notify->users()->attach(User::where('name', $request->input('to'))->first());
+
+         
         
 
+            if($request->user()->permissions()->first()->name == 'donor'){
+                return redirect('messages/message?id='. $user->conversation_id)->with('success','Message sent successfully!');
+            }
             return redirect('admin/message')->with('success','Message sent successfully!');
             
 

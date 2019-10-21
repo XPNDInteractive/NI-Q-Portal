@@ -59,7 +59,7 @@
                           
                             <div  class="tab-pane fade h-100" id="{{str_replace(' ', '_', $convo->subject.$convo->id)}}" role="tabpanel" aria-labelledby="list-home-list">
                                 <div style="height: calc(100% - 154.2px); overflow:auto;" class="row m-0 p-5">
-                                    @foreach($convo->messages()->get() as $message)
+                                    @foreach($convo->messages()->orderBy('created_at', 'asc')->get() as $message)
                                         <div class="row m-0 w-100">
                                             @if($message->from_user_id === $request->user()->name)
                                                 <div class="col-8 ml-auto bg-white border p-3 m-1">

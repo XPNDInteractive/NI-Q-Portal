@@ -3,7 +3,7 @@
 @section('content')
 
 @include('site.blocks.donor-nav')
-<div class="bg-white pb-5">
+<div class="bg-white py-5">
     <div class="container p-5 bg-light border">
         <div class=" mb-4 px-3 d-none">
             <div class="alert alert-danger alert-dismissible fade show rounded-0 mb-1 py-3" role="alert">
@@ -18,29 +18,29 @@
                 <div class="row m-0 align-items-center">
                 
                     <div class="col row m-0 align-items-center">
-                        <a href="{{Route('messages')}}" class="btn btn-danger mr-3 btn-sm"><i class="fas fa-caret-left"></i> Back</a>
-                        <h6 class = "pl-3 m-0 page-title">Message Thread: {{$message->title}}<span class="text-danger"></span></h6>
+                        <a href="{{Route('messages')}}" class="btn btn-danger mr-3 btn-sm d-none"><i class="fas fa-caret-left"></i> Back</a>
+                        <h6 class = "m-0 page-title">Message Thread: {{$message->subject}}<span class="text-danger"></span></h6>
                         
                         
-                        <button class="btn btn-danger btn-sm ml-auto"><i class="fas fa-trash"></i> Trash</button>
+                        
                     </div>
                 </div>
             </div>
         
            
             <div class=" w-100 ">
-             @foreach($message->messages()->get() as $child)
-                <div class="row m-0 w-100 align-items-start">
+             @foreach($message->messages()->orderBy('created_at', 'asc')->get() as $child)
+                <div class="row m-0 w-100 align-items-start mb-2">
                     @if($child->from_user_id === $request->user()->name)
-                        <div class="col-12 ml-auto bg-white border p-5">
-                            <p class="mb-3 text-dark font-weight-bold"><span style="height: 30px; width: 30px; line-height:30px;" class="bg-teal d-inline-block text-center mr-2 text-white">{{$child->from_user_id[0]}} </span>{{$child->from_user_id}} - <span class="small text-muted">{{$child->created_at}}</span></p>
+                        <div class="col-12  bg-white border p-5">
+                            <p class="mb-3 text-dark font-weight-bold bg-light p-3"><span style="height: 30px; width: 30px; line-height:30px;" class="bg-teal d-inline-block text-center mr-2 text-white">{{$child->from_user_id[0]}} </span>{{$child->from_user_id}} - <span class="small text-muted">{{$child->created_at}}</span></p>
                             
                             <div class="text-dark ">{!!$child->message!!}</div>
 
                         </div>
                     @elseif($child->to_user_id === $request->user()->name)
-                        <div class="col-12 bg-white border p-5 ">
-                            <p class="mb-3 text-dark font-weight-bold"><span style="height: 30px; width: 30px; line-height:30px;" class="bg-teal d-inline-block text-center mr-2 text-white">{{$child->from_user_id[0]}} </span> {{$child->from_user_id}}  - <span class="small text-muted">{{$child->created_at}}</span></p>
+                        <div class="col-12 ml-auto bg-white border p-5 ">
+                            <p class="mb-3 text-dark font-weight-bold bg-light p-3"><span style="height: 30px; width: 30px; line-height:30px;" class="bg-teal d-inline-block text-center mr-2 text-white">{{$child->from_user_id[0]}} </span> {{$child->from_user_id}}  - <span class="small text-muted">{{$child->created_at}}</span></p>
                             
                             <div class="text-dark ">{!!$child->message!!}</div>
 
@@ -49,7 +49,7 @@
                 
                     @else
                         <div class="col-12 bg-white border p-5 ">
-                            <p><span style="height: 30px; width: 30px; line-height:30px;" class="bg-teal d-inline-block text-center mr-2 text-white">{{$child->from_user_id[0]}} </span> {{$child->from_user_id}}  - <span class="small text-muted">{{$child->created_at}}</span></p>
+                            <p><span style="height: 30px; width: 30px; line-height:30px; bg-light p-3" class="bg-teal d-inline-block text-center mr-2 text-white">{{$child->from_user_id[0]}} </span> {{$child->from_user_id}}  - <span class="small text-muted">{{$child->created_at}}</span></p>
                             
                             <div class="text-dark ">{!!$child->message!!}</div>
 

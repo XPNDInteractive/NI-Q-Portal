@@ -172,9 +172,9 @@
                     <div class="w-100 mt-4 ">
 
                         <ul class="list-group ">
-                            @foreach($request->user()->notifications()->get() as $convo)
+                            @foreach($request->user()->notifications()->orderBy('created_at', 'desc')->limit(5)->get() as $convo)
                             <a class="py-2 rounded-0   border-bottom text-dark" href="{{$convo->resource}}">
-                                <i class="fas fa-angle-right"></i> {{$convo->message}}
+                                <i class="fas fa-angle-right mr-3"></i> {{$convo->message}} <span class="small">{{date('h:i a m/d/Y', strtotime($convo->created_at))}}</span>
                             </a>
                             @endforeach
                     
@@ -186,13 +186,16 @@
                 <div class=" bg-white text-dark border  p-5 row m-0 align-items-center justify-content-start">
                    <h6 class="font-weight-light m-0"> Your <span class="font-weight-bold">Messages</span></h6>
                     <div class="w-100 mt-4 ">
-
                         <ul class="list-group ">
                             @foreach($request->user()->conversations()->get() as $convo)
-                            <a class="list-group-item rounded-0 bg-teal text-white" href="{{Route('messages')}}"><span class="bg-white d-inline-block text-center text-primary mr-2 text-uppercase" style="height: 20px; width: 20px; ">{{$convo->subject[0]}}</span>{{$convo->subject . '      @' .$convo->users()->where('users.id', '!=', $request->user()->id)->first()->name}}</a>
+                            <a class="py-2 rounded-0   border-bottom text-dark" href="/messages/message?id={{$convo->id}}" >
+                                <i class="fas fa-angle-right mr-3"></i>{{$convo->users()->where('users.id', '!=', $request->user()->id)->first()->name}}:&nbsp; "{{$convo->subject}}"     
+                            </a>
                             @endforeach
                     
                         </ul>
+
+                        
                     </div>
                 </div>
             </div>
