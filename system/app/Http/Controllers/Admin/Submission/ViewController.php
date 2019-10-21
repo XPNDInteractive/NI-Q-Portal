@@ -377,7 +377,7 @@ class ViewController extends Controller
             foreach($request->input('forms') as $formId => $status){
            
                 $_form = Form::where('id', $formId)->first();
-                $submission->user_id->forms()->attach($_form->id);
+                $submission->user_id->forms()->attach($_form->id, ['action' => 'assign']);
                 
                 $user = new \App\Notifications();
                 $user->notification_type_id = \App\NotificationTypes::where('name', 'Form Assigned')->first()->id;
