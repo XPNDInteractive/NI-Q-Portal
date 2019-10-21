@@ -46,7 +46,7 @@
              @endif
              <div class="col-12 row m-0 p-0">
                 @if(isset($request) && !is_null($request->user()->forms()->where('action', 'assign')->first()))
-                    @foreach ($request->user()->forms()->where('active', true)->get() as $form)
+                    @foreach ($request->user()->forms()->where('active', true)->where('action', 'assign')->get() as $form)
                         
                        
                         @if((is_null($form->submissions()->where('user_id', Auth::user()->id)->first()) || !$form->submissions()->where('user_id', Auth::user()->id)->first()->completed) && $form->questions()->count() > 0)
