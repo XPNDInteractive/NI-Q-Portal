@@ -340,7 +340,7 @@ class DonorFormController extends Controller
             $notify->resource = '/admin/forms/submissions/submission?form='.$form->name.'&id=' . $fs->id;
             $notify->save();
 
-            dd($form->users()->where('action', 'notify')->get());
+            //dd($form->users()->where('action', 'notify')->get());
             
             foreach($form->users()->where('action', 'notify')->get() as $user)
             {
