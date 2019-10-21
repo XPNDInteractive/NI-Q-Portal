@@ -76,14 +76,14 @@
                 <div class="col-3 p-1">
                     <div class="bg-white border  p-5 text-center">
                         
-                        <h3 class="m-0">{{\App\Milkkit::count()}}</h3>
+                        <h3 class="m-0">{{\App\MilkKit::count()}}</h3>
                         <p class="m-0 small font-weight-bold">Milkkits</p>
                     </div>
                 </div>
                  <div class="col-3 p-1">
                     <div class="bg-white border  p-5 text-center">
                         
-                        <h3 class="m-0">{{\App\Bloodkit::count()}}</h3>
+                        <h3 class="m-0">{{\App\BloodKit::count()}}</h3>
                         <p class="m-0 small font-weight-bold">Bloodkit</p>
                     </div>
                 </div>
