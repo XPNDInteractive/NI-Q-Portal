@@ -58,29 +58,29 @@
                                 <div class="col-12 row m-0 p-2">
                                      <div class="form-group col-12 col-md-6 mb-4 px-4">
                                         <label>First Name:</label>
-                                        <input class="form-control" type="text" value=""/>
+                                        <input class="form-control" type="text" value="{{Auth::user()->first_name}}"/>
                                         <p class="small text-muted">Please enter your first name as found on your social secruity card</p>
                                     </div>
                                     <div class="form-group col-12 col-md-6 mb-4 px-4">
                                         <label>Last Name:</label>
-                                        <input class="form-control" type="text" value=""/>
+                                        <input class="form-control" type="text" value="{{Auth::user()->last_name}}"/>
                                         <p class="small text-muted">Please enter your last name as found on your social secruity card</p>
                                     </div>
                                     
                                    
                                      <div class="form-group col-12 col-md-6 mb-4 px-4">
                                         <label>Email:</label>
-                                        <input class="form-control" type="text" value=""/>
+                                        <input class="form-control" type="text" value="{{Auth::user()->email}}"/>
                                         <p class="small text-muted">Please enter your first name as found on your social secruity card</p>
                                     </div>
                                     <div class="form-group col-12 col-md-6 mb-4 px-4">
                                         <label>Home Phone:</label>
-                                        <input class="form-control" type="text" value=""/>
+                                        <input class="form-control" type="text" value="{{Auth::user()->home_phone}}"/>
                                         <p class="small text-muted">Please enter your last name as found on your social secruity card</p>
                                     </div>
                                      <div class="form-group col-12 col-md-6 mb-4 px-4">
                                         <label>Cell Phone:</label>
-                                        <input class="form-control" type="text" value=""/>
+                                        <input class="form-control" type="text" value="{{Auth::user()->cell_phone}}"/>
                                         <p class="small text-muted">Please enter your last name as found on your social secruity card</p>
                                     </div>
                                    
