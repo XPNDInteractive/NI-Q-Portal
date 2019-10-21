@@ -428,4 +428,9 @@ $('table tr td.clickable').on("click", function(e){
         window.location.href = $(this).parent().data('href');
     }
     
-})
+});
+
+
+$('button.export').on('click', function(){
+    $('form.exports').submit();
+});

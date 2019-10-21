@@ -435,7 +435,7 @@ class FormTableSeeder extends Seeder
 
         $question = new Question();
         $question->form_id = $form->id;
-        $question->question = "<h5>	Do you have any of the following a STD?</h5>";
+        $question->question = "<h5>	Have you had any of the following STD's?</h5>";
         $question->active = true;
         $question->save();
 
@@ -452,7 +452,7 @@ class FormTableSeeder extends Seeder
         $qc = new QuestionCondition();
         $qc->field_id = $field->id;
         $qc->question_condition_type_id = QuestionConditionType::where('name', "Value Equals")->first()->id;
-        $qc->question_condition_action_id = QuestionConditionAction::where('name', "Disqualify")->first()->id;
+        $qc->question_condition_action_id = QuestionConditionAction::where('name', "Wait 60 days")->first()->id;
         $qc->condition = "Trichomoniasis";
         $qc->save();
         

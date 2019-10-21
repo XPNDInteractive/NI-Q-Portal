@@ -14,7 +14,7 @@
                 <a class="btn btn-warning text-white btn-sm ml-auto mr-1" href="{{$map_route}}"><i class="fas fa-sitemap"></i> map</a>
                 @endif
                 <a class="btn btn-primary btn-sm ml-auto" href="{{$create_route}}"><i class="fas fa-plus"></i> create</a>
-                <button class="btn btn-warning btn-sm  ml-1 delete d-none " data-toggle="modal" data-target="#create-form"><i class="fas fa-trash"></i> Export</button>
+                <button class="btn btn-warning btn-sm  ml-1 delete d-none export"><i class="fas fa-download"></i> Export</button>
             </div>
         </div>
     </div>
@@ -42,8 +42,9 @@
             </div>
         @endif
         <div class="table-responsive  bg-white">
-
-           <table id="example" class="table table-fixed w-100  searchable m-0" style="width:100%">
+            <form class="exports" method="post" action="/admin/shipping/export">
+            @csrf
+            <table id="example" class="table table-fixed w-100  searchable m-0" style="width:100%">
                 <thead>
                     <tr>
                         <th  class="py-3 px-5">
@@ -71,7 +72,7 @@
                             <tr class="hover " data-href="{{$view_route}}?id={{$user->id}}">
                                 <td class="px-5 ">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="{{$user->id}}">
+                                        <input name="exports[]" value="{{$user->id}}" type="checkbox" class="custom-control-input" id="{{$user->id}}">
                                         <label class="custom-control-label" for="{{$user->id}}"></label>
                                     </div>
                                 </td>
@@ -93,6 +94,7 @@
                     
                 </tbody>
             </table>
+            </form>
         </div>
          @else
             <div class="mx-auto w-75 mt-5 p-5 text-center bg-white border">

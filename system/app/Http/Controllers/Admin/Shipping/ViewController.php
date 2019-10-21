@@ -29,7 +29,10 @@ class ViewController extends Controller
     }
 
     public function list(Request $request)
-    {
+    {   
+        if($request->session()->get('refresh')){
+            return redirect(Request::url());
+        }
         $page = $this->getPage($request);
 
         $page['datasets']['list'] = [

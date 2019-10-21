@@ -45,7 +45,7 @@ Route::get('/admin/forms', 'Admin\ViewsController@forms')->name('admin.forms');
 Route::get('/admin/shipping', 'Admin\Shipping\ViewController@list')->name('admin.shipping');
 Route::get('/admin/shipping/create', 'Admin\Shipping\ViewController@create')->name('admin.shipping.create');
 Route::post('/admin/shipping/create', 'Admin\Shipping\ActionController@save')->name('admin.shipping.save');
-
+Route::post('/admin/shipping/export', 'Admin\Shipping\ActionController@export')->name('admin.shipping.export');
 
 // admin Donor
 Route::get('/admin/donors', 'Admin\Donor\ViewController@list')->name('admin.donors');
