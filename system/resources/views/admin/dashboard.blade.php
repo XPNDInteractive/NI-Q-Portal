@@ -15,7 +15,7 @@
                         <div class="w-100 mt-4 ">
 
                             <ul class="list-group ">
-                                @foreach($request->user()->notifications()->get() as $convo)
+                                @foreach($request->user()->notifications()->orderBy('created_at', 'desc')->get() as $convo)
                                 <a 
                                     class="list-group-item rounded-0 bg-info text-white" 
                                     href="{{$convo->resource}}">
@@ -36,7 +36,7 @@
                         <div class="w-100 mt-4 ">
 
                             <ul class="list-group ">
-                                @foreach($request->user()->conversations()->get() as $convo)
+                                @foreach($request->user()->conversations()->orderBy('created_at', 'desc')->get() as $convo)
                                 <a class="list-group-item rounded-0 bg-primary text-white" href="{{Route('admin.message')}}"><span class="bg-white d-inline-block text-center text-primary mr-2 text-uppercase" style="height: 20px; width: 20px; ">{{$convo->subject[0]}}</span>{{$convo->subject . ' - ' .$convo->users()->where('users.id', '!=', $request->user()->id)->first()->name}}</a>
                                 @endforeach
                         

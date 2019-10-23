@@ -119,6 +119,7 @@ class ActionController extends Controller
         }
 
         $name = \uniqid();
+
         $fp = fopen(storage_path() . '/app/public/'.$name.'.csv', 'w');
 
         foreach ($csv as $fields) {
