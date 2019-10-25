@@ -103,6 +103,7 @@ class ActionController extends Controller
         foreach($request->input('exports') as $donor){
             $d = Donor::where('id', \App\Shipping::where('id', $donor)->first()->donor_id)->first();
             $csv[] = [
+                $d->id,
                 $d->user_id->first_name,
                 $d->user_id->last_name,
                 $d->user_id->home_phone,

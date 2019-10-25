@@ -38,9 +38,9 @@ class ViewController extends Controller
         $page['datasets']['list'] = [
             'columns' => [
                 'Donor ID' => function($row){
-                    return $row->donor()->id;
+                    return $row->donor()->first()->id;
                 } ,
-                
+
                 'First Name' => function($row){
                     return $row->donor()->first()->user_id->first_name;
                 } ,
