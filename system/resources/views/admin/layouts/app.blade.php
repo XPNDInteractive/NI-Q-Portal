@@ -33,7 +33,7 @@
         <div class="h-100 overflow-auto sidebar" >
            
             <ul class="nav flex-column">
-               @foreach($admin_menu->items()->get() as $item)
+               @foreach($admin_menu->items()->orderBy('created_at', 'asc')->get() as $item)
                   @foreach($userPermissions as $permmission)
                      @if(!is_null($item->permissions()->where('name', $permmission->name)->first()))
                         <li class="nav-item">
