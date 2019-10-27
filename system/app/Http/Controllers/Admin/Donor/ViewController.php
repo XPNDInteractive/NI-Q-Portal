@@ -14,6 +14,7 @@ use App\PageType;
 use App\Menu;
 use App\Donor;
 use App\User;
+use App\Library\DonorAPI;
 
 class ViewController extends Controller
 {
