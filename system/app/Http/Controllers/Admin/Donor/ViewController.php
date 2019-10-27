@@ -30,7 +30,7 @@ class ViewController extends Controller
     public function list(Request $request)
     {
         $api = new DonorAPI('http://donortrack.ni-q.com/', 'api1', 'Api1Rand0M');
-        $api->getDonors();
+        dd($api->getDonors());
         $page = $this->getPage($request);
 
         $page['datasets']['list'] = [
