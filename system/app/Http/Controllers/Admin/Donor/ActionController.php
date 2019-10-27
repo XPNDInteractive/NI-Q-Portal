@@ -89,8 +89,22 @@ class ActionController extends Controller
             $user->save();
 
             $api = new DonorAPI('http://donortrack.ni-q.com/', 'api1', 'Api1Rand0M');
+            $api->post('api/donor', [
+                "Url"=> "",
+                "DonorId"=> $user->id,
+                "FirstName"=> $user->user_id->first_name,
+                "LastName"=> $user->user_id->last_name,
+                "DateOfBirth"=> $user->date_of_birth,
+                "Email"=> $user->user_id->email,
+                "ReceiveConsentForm"=> $user->recieved_consent_form,
+                "ReceiveFinancialForm"=> $user->recieved_finacial_form,
+                "InactiveDate"=> "",
+                "InactiveReason"=> "",
+                "Active"=> $user->active,
+                "Notes"=> ""
+            ]);
 
-            
+            dd($api->getDonors());
             return redirect()->route('admin.donors')->with('success','Donor created successfully!');
         }
 
