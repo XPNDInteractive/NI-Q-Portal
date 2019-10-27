@@ -13,6 +13,7 @@ use App\Notifications;
 use App\PageType;
 use App\Menu;
 use App\Donor;
+use App\Library\DonorAPI;
 
 class ActionController extends Controller
 {
@@ -86,6 +87,9 @@ class ActionController extends Controller
             
           
             $user->save();
+
+            $api = new DonorAPI('http://donortrack.ni-q.com/', 'api1', 'Api1Rand0M');
+
             
             return redirect()->route('admin.donors')->with('success','Donor created successfully!');
         }

@@ -24,6 +24,7 @@ class PageSeeder extends Seeder
         $page->save();
         $page->permissions()->attach(Permission::where('name', 'admin')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'manager')->first()->id);
+        $page->permissions()->attach(Permission::where('name', 'Shipping')->first()->id);
 
 
 
@@ -228,6 +229,7 @@ class PageSeeder extends Seeder
         $page->save();
         $page->permissions()->attach(Permission::where('name', 'admin')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'manager')->first()->id);
+        $page->permissions()->attach(Permission::where('name', 'Shipping')->first()->id);
 
 
         $page = new Page();
@@ -239,6 +241,18 @@ class PageSeeder extends Seeder
         $page->save();
         $page->permissions()->attach(Permission::where('name', 'admin')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'manager')->first()->id);
+        $page->permissions()->attach(Permission::where('name', 'Shipping')->first()->id);
+
+        $page = new Page();
+        $page->page_type_id = PageType::where('name', 'admin')->first()->id;
+        $page->title = "Shipping Export";
+        $page->slug = 'admin/shipping/export';
+        $page->template = 'admin.export';
+        $page->active = true;
+        $page->save();
+        $page->permissions()->attach(Permission::where('name', 'admin')->first()->id);
+        $page->permissions()->attach(Permission::where('name', 'manager')->first()->id);
+        $page->permissions()->attach(Permission::where('name', 'Shipping')->first()->id);
 
 
 
@@ -558,6 +572,7 @@ class PageSeeder extends Seeder
         $page->permissions()->attach(Permission::where('name', 'admin')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'donor')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'manager')->first()->id);
+        $page->permissions()->attach(Permission::where('name', 'Shipping')->first()->id);
 
         $page = new Page();
         $page->page_type_id = PageType::where('name', 'donor')->first()->id;
@@ -569,6 +584,7 @@ class PageSeeder extends Seeder
         $page->permissions()->attach(Permission::where('name', 'admin')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'donor')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'manager')->first()->id);
+        $page->permissions()->attach(Permission::where('name', 'Shipping')->first()->id);
 
         $page = new Page();
         $page->page_type_id = PageType::where('name', 'donor')->first()->id;
@@ -580,6 +596,7 @@ class PageSeeder extends Seeder
         $page->permissions()->attach(Permission::where('name', 'admin')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'donor')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'manager')->first()->id);
+        $page->permissions()->attach(Permission::where('name', 'Shipping')->first()->id);
 
         $page = new Page();
         $page->page_type_id = PageType::where('name', 'donor')->first()->id;
@@ -591,6 +608,7 @@ class PageSeeder extends Seeder
         $page->permissions()->attach(Permission::where('name', 'admin')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'donor')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'manager')->first()->id);
+        $page->permissions()->attach(Permission::where('name', 'Shipping')->first()->id);
 
         $page = new Page();
         $page->page_type_id = PageType::where('name', 'donor')->first()->id;
@@ -646,6 +664,7 @@ class PageSeeder extends Seeder
         $page->permissions()->attach(Permission::where('name', 'admin')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'donor')->first()->id);
         $page->permissions()->attach(Permission::where('name', 'manager')->first()->id);
+        $page->permissions()->attach(Permission::where('name', 'Shipping')->first()->id);
 
         $page = new Page();
         $page->page_type_id = PageType::where('name', 'donor')->first()->id;

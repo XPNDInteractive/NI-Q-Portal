@@ -216,4 +216,56 @@ class ViewController extends Controller
 
         return view($page['template'], $page);
     }
+
+    public function export(Request $request){
+        $page = $this->getPage($request);
+        $validator = Validator::make($request->all(), [
+            'exports' => ['required'],
+           
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $csv = [];
+       
+        foreach($request->input('exports') as $donor){
+            $d = Donor::where('id', \App\Shipping::where('id', $donor)->first()->donor_id)->first();
+            $csv[] = [
+                $d->id,
+                $d->user_id->first_name,
+                $d->user_id->last_name,
+                $d->user_id->home_phone,
+                $d->user_id->cell_phone,
+                $d->shipping_address,
+                $d->shipping_address2,
+                $d->shipping_city,
+                $d->shipping_state,
+                $d->shipping_zipcode
+                
+            ];
+
+            \App\Shipping::where('id', $donor)->delete();
+        }
+
+        $name = \uniqid();
+
+        $fp = fopen(storage_path() . '/app/public/'.$name.'.csv', 'w');
+
+        foreach ($csv as $fields) {
+            fputcsv($fp, $fields);
+        }
+
+        fclose($fp);
+        $request->session()->flash('export', $name);
+        return view($page['template'], $page);
+       
+    }
+
+    public function download(){
+        return response()->download(storage_path() . '/app/public/'.session('export').'.csv');
+    }
 }
