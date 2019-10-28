@@ -48,6 +48,7 @@
                                                 </td>
                                                 <td class="p-3">
                                                     @php $qm = App\FormQuestionMap::where('question_id', $question->id)->where('field_id', $field->id)->first(); @endphp
+                                                    {{dd($datasets['tables']['rows'])}}
                                                     <select class="form-control" name="questions[{{$question->id}}][{{$field->id}}][col]">
                                                         <option value="">Select a table column</option>
                                                         @foreach($datasets['tables']['rows'] as $table => $columns)
