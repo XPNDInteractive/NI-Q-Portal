@@ -119,8 +119,8 @@ class ViewController extends Controller
         $tables = [];
 
         foreach(\DB::select('SHOW TABLES') as $table){
-            $columns = \DB::getSchemaBuilder()->getColumnListing($table->Tables_in_portal);
-            $tables[$table->Tables_in_portal] = $columns;
+            $columns = \DB::getSchemaBuilder()->getColumnListing($table->Tables_in_portaldb);
+            $tables[$table->Tables_in_portaldb] = $columns;
         }
 
         $page['datasets']['map'] = [
