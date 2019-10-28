@@ -203,8 +203,7 @@
                                     @if(!is_null($mk->paid_date))
                                     <p><span class="font-weight-bold">Paid Date:  </span> {{date('m-d-Y', strtotime($mk->paid_date))}} </p>
                                     @endif
-                                    <p><span class="font-weight-bold">Total Cases:  </span> {{$mk->total_cases}} </p>  
-                                    <p><span class="font-weight-bold">Closed:  </span> {{$mk->closed}} </p>  
+                                      
                                 </div>
                             @endforeach
                     

@@ -124,7 +124,7 @@ class ActionController extends Controller
                         $cons->question_condition_type_id = $field['type'];
                         $cons->question_condition_action_id = $field['action'];
                         $cons->condition =  $field['value'];
-                        $cons->show_date_field = $field['date'] == "on" ? true:false;
+                        $cons->show_date_field = isset($field['date']) && $field['date'] == "on" ? true:false;
                         $cons->save();
                         
                     }
