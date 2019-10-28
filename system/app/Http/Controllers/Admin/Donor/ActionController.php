@@ -88,7 +88,7 @@ class ActionController extends Controller
           
             $user->save();
 
-            $api = new DonorAPI('http://172.16.25.20/', 'api1', 'Api1Rand0M');
+            $api = new DonorAPI('https://donortrack.ni-q.com:443/', 'api1', 'Api1Rand0M');
 
             try{
                 $api->post('api/donor', [

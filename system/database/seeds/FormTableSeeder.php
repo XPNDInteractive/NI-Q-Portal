@@ -34,6 +34,7 @@ class FormTableSeeder extends Seeder
         $question = new Question();
         $question->form_id = $form->id;
         $question->question = "<h5>What is your date of birth?</h5>";
+        $question->order = 0;
         $question->active = true;
         $question->save();
 
@@ -467,6 +468,8 @@ class FormTableSeeder extends Seeder
         $field->download = NULL;
         $field->save();
 
+        
+
         $qc = new QuestionCondition();
         $qc->field_id = $field->id;
         $qc->question_condition_type_id = QuestionConditionType::where('name', "Value Equals")->first()->id;
@@ -506,7 +509,7 @@ class FormTableSeeder extends Seeder
         $qc = new QuestionCondition();
         $qc->field_id = $field->id;
         $qc->question_condition_type_id = QuestionConditionType::where('name', "Value Equals")->first()->id;
-        $qc->question_condition_action_id = QuestionConditionAction::where('name', "Disqualify")->first()->id;
+        $qc->question_condition_action_id = QuestionConditionAction::where('name', "Wait 60 days")->first()->id;
         $qc->condition = "Genital Herpes";
         $qc->save();
         
@@ -520,6 +523,13 @@ class FormTableSeeder extends Seeder
         $field->options = NULL;
         $field->download = NULL;
         $field->save();
+
+        $qc = new QuestionCondition();
+        $qc->field_id = $field->id;
+        $qc->question_condition_type_id = QuestionConditionType::where('name', "Value Equals")->first()->id;
+        $qc->question_condition_action_id = QuestionConditionAction::where('name', "Wait 60 days")->first()->id;
+        $qc->condition = "Gonorrhea";
+        $qc->save();
         
 
         $field = new QuestionField();
@@ -531,6 +541,13 @@ class FormTableSeeder extends Seeder
         $field->options = NULL;
         $field->download = NULL;
         $field->save();
+
+        $qc = new QuestionCondition();
+        $qc->field_id = $field->id;
+        $qc->question_condition_type_id = QuestionConditionType::where('name', "Value Equals")->first()->id;
+        $qc->question_condition_action_id = QuestionConditionAction::where('name', "Wait 60 days")->first()->id;
+        $qc->condition = "Chlamydia";
+        $qc->save();
        
 
         
@@ -552,16 +569,6 @@ class FormTableSeeder extends Seeder
         $qc->condition = "Viral Hepatitis";
         $qc->save();
 
-        
-        $field = new QuestionField();
-        $field->question_id = $question->id;
-        $field->question_field_type_id = QuestionFieldType::where('name', 'textarea')->first()->id;
-        $field->name = "Other";
-        $field->value = NULL;
-        $field->label = "Other";
-        $field->options = NULL;
-        $field->download = NULL;
-        $field->save();
        
 
         
@@ -570,7 +577,7 @@ class FormTableSeeder extends Seeder
         $field->question_field_type_id = QuestionFieldType::where('name', 'checkbox')->first()->id;
         $field->name = "none";
         $field->value = "none";
-        $field->label = "I do not have any STD's";
+        $field->label = "I do not have any ST's";
         $field->options = NULL;
         $field->download = NULL;
         $field->save();
@@ -580,7 +587,7 @@ class FormTableSeeder extends Seeder
 
         $question = new Question();
         $question->form_id = $form->id;
-        $question->question = "<h5>DHave you been exposed to Hepatitis A and/or received a gamma globulin shot in the last month?</h5>";
+        $question->question = "<h5>Have you been exposed to Hepatitis A and/or received a gamma globulin shot in the last month?</h5>";
         $question->active = true;
         $question->save();
 

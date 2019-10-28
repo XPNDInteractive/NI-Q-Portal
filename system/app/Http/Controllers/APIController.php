@@ -24,7 +24,7 @@ class APIController extends Controller
      */
     public function sync(Request $request)
     {
-        $api = new \App\Library\DonorAPI('http://172.16.25.20/', 'api1', 'Api1Rand0M');
+        $api = new \App\Library\DonorAPI('https://donortrack.ni-q.com:443/', 'api1', 'Api1Rand0M');
         $milkKits = $api->get('api/MilkKit');
 
         foreach($milkKits as $mk){
