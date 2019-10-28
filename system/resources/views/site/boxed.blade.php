@@ -186,7 +186,7 @@
                     </div>
                 </div>
             </div>
-
+            @if(!is_null($request->user()->donors()->first()) && $request->user()->donors()->first()->milkkits()->count() > 0)
              <div class="col p-1">
                 <div class=" bg-white  border  p-5 row m-0 align-items-center justify-content-start">
                    <h6 class="font-weight-light m-0"> Your <span class="font-weight-bold">Milk Kits</span></h6>
@@ -212,6 +212,8 @@
                     </div>
                 </div>
             </div>
+            @endif
+            @if(!is_null($request->user()->donors()->first()) && $request->user()->donors()->first()->bloodkits()->count() > 0)
             <div class="col p-1">
                 <div class=" bg-white  border  p-5 row m-0 align-items-center justify-content-start">
                    <h6 class="font-weight-light m-0"> Your <span class="font-weight-bold">Blood Kits</span></h6>
@@ -237,7 +239,7 @@
                     </div>
                 </div>
             </div>
-            
+            @endif
         </div>
     </div>
 </div>
