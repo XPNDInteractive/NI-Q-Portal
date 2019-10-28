@@ -118,15 +118,21 @@ class ActionController extends Controller
                
             }
            
-            $notify = [];
-            if(!is_null($request->input('notify'))){
-                foreach($request->input('notify') as $key => $value){
-                    
-                    $users[] = ['user_id' => $key, 'action' => 'notify'];
+           
+            if(!is_null($request->input('users'))){
+                foreach($request->input('users') as $key => $value){
+                    $user->users()->sync(User::where('id', $key)->first(), ['action' =>'assign']);
                 }
             }
 
-            $user->users()->sync($users);
+
+            if(!is_null($request->input('notify'))){
+                foreach($request->input('notify') as $key => $value){
+                    $user->users()->sync(User::where('id', $key)->first(), ['action' => 'notify']);
+                }
+            }
+            
+            
 
            
 

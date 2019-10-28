@@ -295,14 +295,14 @@ class DonorFormController extends Controller
             $fs->blocked = true;
             $fs->update();
 
-            return redirect('/form/disqualified');
+            return redirect('/donor/form/disqualified');
         }
 
         elseif($waited){
             $fs->waited = true;
             $fs->waited_time = date('Y-m-d', strtotime(date('Y-m-d'). ' + '.$waitTime.' days'));
             $fs->update();
-            return redirect('/form/waitlisted');
+            return redirect('/donor/form/waitlisted');
         }
 
         $questions = $form->questions()->orderBy('order')->get();
@@ -348,7 +348,7 @@ class DonorFormController extends Controller
             }
             
 
-            return redirect('/form/thankyou');
+            return redirect('/');
         }
     }
 

@@ -88,23 +88,48 @@ class ActionController extends Controller
           
             $user->save();
 
-            $api = new DonorAPI('http://donortrack.ni-q.com/', 'api1', 'Api1Rand0M');
-            $api->post('api/donor', [
-                "Url"=> "",
+            $api = new DonorAPI('http://172.16.25.20/', 'api1', 'Api1Rand0M');
+
+            try{
+                $api->post('api/donor', [
+                    "Url"=> "",
+                    "DonorId"=> $user->id,
+                    "FirstName"=> $user->user_id->first_name,
+                    "LastName"=> $user->user_id->last_name,
+                    "DateOfBirth"=> $user->date_of_birth,
+                    "Email"=> $user->user_id->email,
+                    "ReceiveConsentForm"=> $user->recieved_consent_form,
+                    "ReceiveFinancialForm"=> $user->recieved_finacial_form,
+                    "InactiveDate"=> "",
+                    "InactiveReason"=> "",
+                    "Active"=> $user->active,
+                    "Notes"=> ""
+                ]);
+            }catch(Exception $e){
+                return redirect()->route('admin.donors')->with('success','Donor created successfully!');
+            }
+           
+
+            $api->post('api/donor/'.$user->id.'/mailingaddress', [
                 "DonorId"=> $user->id,
-                "FirstName"=> $user->user_id->first_name,
-                "LastName"=> $user->user_id->last_name,
-                "DateOfBirth"=> $user->date_of_birth,
-                "Email"=> $user->user_id->email,
-                "ReceiveConsentForm"=> $user->recieved_consent_form,
-                "ReceiveFinancialForm"=> $user->recieved_finacial_form,
-                "InactiveDate"=> "",
-                "InactiveReason"=> "",
-                "Active"=> $user->active,
-                "Notes"=> ""
+                "DonorUrl"=> null,
+                "Address1"=> $user->mailing_address,
+                "Address2"=> $user->mailing_address2,
+                "City"=> $user->mailing_city,
+                "State"=> $user->mailing_state,
+                "Zipcode"=> $user->mailing_zipcode
             ]);
 
-            dd($api->getDonors());
+            $api->post('api/donor/'.$user->id.'/shippingaddress', [
+                "DonorId"=> $user->id,
+                "DonorUrl"=> null,
+                "Address1"=> $user->shipping_address,
+                "Address2"=> $user->shipping_address2,
+                "City"=> $user->shipping_city,
+                "State"=> $user->shipping_state,
+                "Zipcode"=> $user->shipping_zipcode
+            ]);
+
             return redirect()->route('admin.donors')->with('success','Donor created successfully!');
         }
 

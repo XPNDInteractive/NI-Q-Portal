@@ -341,8 +341,11 @@ class ViewController extends Controller
                     ->first();
 
 
+                    if(!is_null($map->value)){
+                        $insert[$map->table][$map->column] = $map->value;
+                    }
 
-                    if(!is_null($answer)){
+                    elseif(is_null($map->value) && !is_null($answer)){
                         $insert[$map->table][$map->column] = $answer->answer;
                     }
 
@@ -354,17 +357,24 @@ class ViewController extends Controller
             }
         }
 
-        if(isset($insert['donors'])){
-            $insert['donors']['user_id'] = $submission->user_id->id;
+        if(is_null($submission->user_id->donors()->first())){
+            foreach($insert as $table => $col){
+                $col['active'] = true;
+                $col['user_id'] =  $submission->user_id->id;
+                $col['created_at'] = now();
+                $col['updated_at'] = now();
+                $inserted = \DB::table($table)->insert($col);
+            }
         }
 
-        foreach($insert as $table => $col){
-            $col['active'] = true;
-            $col['created_at'] = now();
-            $col['updated_at'] = now();
-            $inserted = \DB::table($table)->insert($col);
-            
+        else{
+           
+            foreach($insert as $table => $col){
+
+                $inserted = \DB::table($table)->where('user_id', $submission->user_id->id)->update($col);
+            }
         }
+       
 
 
        
@@ -388,8 +398,46 @@ class ViewController extends Controller
             }
         }
         
-        
+        if($form->name == 'Donor Application'){
+            $donor = $submission->user_id->donors()->first();
 
+            $api->post('api/donor', [
+                "Url"=> "",
+                "DonorId"=> $donor->id,
+                "FirstName"=> $donor->user_id->first_name,
+                "LastName"=> $donor->user_id->last_name,
+                "DateOfBirth"=> $donor->date_of_birth,
+                "Email"=> $donor->user_id->email,
+                "ReceiveConsentForm"=> $donor->recieved_consent_form,
+                "ReceiveFinancialForm"=> $donor->recieved_finacial_form,
+                "InactiveDate"=> "",
+                "InactiveReason"=> "",
+                "Active"=> $donor->active,
+                "Notes"=> ""
+            ]);
+    
+            $api->post('api/donor/'.$donor->id.'/mailingaddress', [
+                "DonorId"=> $donor->id,
+                "DonorUrl"=> null,
+                "Address1"=> $donor->mailing_address,
+                "Address2"=> $donor->mailing_address2,
+                "City"=> $donor->mailing_city,
+                "State"=> $donor->mailing_state,
+                "Zipcode"=> $donor->mailing_zipcode
+            ]);
+    
+            $api->post('api/donor/'.$donor->id.'/shippingaddress', [
+                "DonorId"=> $donor->id,
+                "DonorUrl"=> null,
+                "Address1"=> $donor->shipping_address,
+                "Address2"=> $donor->shipping_address2,
+                "City"=> $donor->shipping_city,
+                "State"=> $donor->shipping_state,
+                "Zipcode"=> $donor->shipping_zipcode
+            ]);
+    
+        }
+       
         $user = new \App\Notifications();
         $user->notification_type_id = \App\NotificationTypes::where('name', 'Donor Approved')->first()->id;
         $user->message = 'Congratuations you have been approved.';

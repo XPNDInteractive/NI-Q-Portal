@@ -34,16 +34,7 @@
             </div>
         @endif
         <div class="row m-0 justify-content-center">
-             @if(!is_null(Auth::user()->donors()->first()) && Auth::user()->donors()->first()->milkkits()->count() == 0)
-            <div class="col-12  p-1 mb-2 d-none">
-                <div class="row m-0 align-items-center">
-                   
-                   
-                    
-                   
-                </div>
-            </div>
-             @endif
+          
              <div class="col-12 row m-0 p-0">
                 @if(isset($request) && !is_null($request->user()->forms()->where('action', 'assign')->first()))
                     @foreach ($request->user()->forms()->where('active', true)->where('action', 'assign')->get() as $form)
@@ -159,11 +150,7 @@
                             </div>
                         @endif
                     @endforeach
-                @else
-                <div class="border  px-5 py-4 my-5 col-12 bg-white row mx-0 align-items-center">
-                    <p class="m-0">Looks like you dont have any Forms at this time. </p>
-                        
-                </div>
+              
                 @endif
              </div>
             <div class="col-6 p-1">
@@ -182,7 +169,7 @@
                     </div>
                 </div>
             </div>
-             <div class="col-6 p-1">
+            <div class="col-6 p-1">
                 <div class=" bg-white text-dark border  p-5 row m-0 align-items-center justify-content-start">
                    <h6 class="font-weight-light m-0"> Your <span class="font-weight-bold">Messages</span></h6>
                     <div class="w-100 mt-4 ">
@@ -196,6 +183,57 @@
                         </ul>
 
                         
+                    </div>
+                </div>
+            </div>
+
+             <div class="col p-1">
+                <div class=" bg-white  border  p-5 row m-0 align-items-center justify-content-start">
+                   <h6 class="font-weight-light m-0"> Your <span class="font-weight-bold">Milk Kits</span></h6>
+                    <div class="w-100 mt-4 ">
+
+                        <ul class="list-group ">
+                            @foreach($request->user()->donors()->first()->milkkits()->get() as $k => $mk)
+                                <a class="p-2 rounded-0 mk border" data-toggle="collapse" href="#mk-{{$k}}">
+                                    <i class="fas fa-angle-right mr-2"></i>Milk Kit #{{$mk->barcode}} - {{date('m-d-Y', strtotime($mk->received_date))}}
+                                </a>
+                                <div class="collapse w-100 bg-light p-3 border" id="mk-{{$k}}">
+                                    <p><span class="font-weight-bold">Volume:  </span> {{$mk->volume}}</p>
+                                    <p><span class="font-weight-bold">Received Date:  </span> {{date('m-d-Y', strtotime($mk->received_date))}} </p>
+                                    @if(!is_null($mk->paid_date))
+                                    <p><span class="font-weight-bold">Paid Date:  </span> {{date('m-d-Y', strtotime($mk->paid_date))}} </p>
+                                    @endif
+                                    <p><span class="font-weight-bold">Total Cases:  </span> {{$mk->total_cases}} </p>  
+                                    <p><span class="font-weight-bold">Closed:  </span> {{$mk->closed}} </p>  
+                                </div>
+                            @endforeach
+                    
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col p-1">
+                <div class=" bg-white  border  p-5 row m-0 align-items-center justify-content-start">
+                   <h6 class="font-weight-light m-0"> Your <span class="font-weight-bold">Blood Kits</span></h6>
+                    <div class="w-100 mt-4 ">
+
+                        <ul class="list-group ">
+                            @foreach($request->user()->donors()->first()->bloodkits()->get() as $k => $mk)
+                                <a class="p-2 rounded-0 border mk" data-toggle="collapse" href="#bk-{{$k}}">
+                                    <i class="fas fa-angle-right mr-2"></i>#{{$k + 1}}. &nbsp; {{$mk->tracking_number}}
+                                </a>
+                                 <div class="collapse w-100 bg-light p-3 border" id="bk-{{$k}}">
+                                  
+                                    <p><span class="font-weight-bold">Received Date:  </span> {{date('m-d-Y', strtotime($mk->received_date))}} </p>
+                                    @if(!is_null($mk->order_date))
+                                        <p><span class="font-weight-bold">Order Date:  </span> {{date('m-d-Y', strtotime($mk->order_date))}} </p>
+                                    @endif
+                                  
+                                </div>
+                               
+                            @endforeach
+                    
+                        </ul>
                     </div>
                 </div>
             </div>

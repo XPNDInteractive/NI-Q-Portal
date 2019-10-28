@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Notifications;
 use App\Form;
 use App\User;
+use App\Library\DonorAPI;
 
 class ViewsController extends Controller
 {
@@ -28,8 +29,14 @@ class ViewsController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+
+
     public function dashboard(Request $request)
     {
+        
+        
+            
         $page = $this->getPage($request);
         //$page['sidebarHide'] = true;
         return view($page['template'], $page);

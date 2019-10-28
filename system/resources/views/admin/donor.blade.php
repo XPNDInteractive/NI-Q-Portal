@@ -203,7 +203,7 @@
                         </div>
                       
                     </div>
-                    <div class="col-6">
+                    <div class="col-12">
              
                         @if($donor->bloodkits()->count() > 0)
                         <div class="">
@@ -240,7 +240,7 @@
                             </div>
                             <table class="table bg-white border-left border-right">
                                 <tbody>
-                                    @foreach($donor->milkkits()->get() as $mk)
+                                    @foreach($donor->milkkits()->where('closed', false)->get() as $mk)
                                         @php $mk = $mk->toArray(); @endphp
                                         @foreach($mk as $col => $val)
                                             @if($col !== "id" && $col !== 'donor_id')

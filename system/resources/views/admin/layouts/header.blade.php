@@ -14,10 +14,11 @@
             
         </div>
            
+        <a class="btn btn-danger ml-auto" href="/system/sync"><i class="fas fa-sync"></i> Sync</a>
            
-        <a id="navbarDropdown" class="btn btn-primary ml-auto px-3 text-white dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    <i class="fas fa-user mr-1"></i> {{ Auth::user()->name }} <span class="caret"></span>
-                </a>
+        <a id="navbarDropdown" class="btn btn-primary ml-2 px-3 text-white dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <i class="fas fa-user mr-1"></i> {{ Auth::user()->name }} <span class="caret"></span>
+        </a>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ route('logout') }}"

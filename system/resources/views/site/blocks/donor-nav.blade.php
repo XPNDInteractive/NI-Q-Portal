@@ -4,7 +4,7 @@
             <button class="btn btn-clean navbar-toggler" data-toggle="collapse" data-target="#navbarTogglerDemo01" ><i class="fas fa-bars"></i> MENU</button>
             
           
-                <ul class="navbar-nav d-none d-md-flex">
+                <ul class="navbar-nav d-none d-md-flex mr-auto">
                    
                    @foreach($donor_menu->items()->get() as $item)
                         @foreach($userPermissions as $permmission)
@@ -16,21 +16,18 @@
                     @endforeach
                     
                 </ul>
-           
-           <ul class="nav ml-auto">
                 @if(!is_null(Auth::user()->donors()->first()) && Auth::user()->donors()->first()->milkkits()->count() > 0)
-                <li class="nav-item mr-2">
-                    <a href="{{Route('milkkit_send')}}" class="nav-link">Request Milk Kit</a>
-                </li>
+                
+                    <a href="{{Route('milkkit_send')}}" class="btn btn-teal-sm mt-1">Request Milk Kit</a>
+               
 
-                 <li class="nav-item mr-2">
-                    <a href="{{Route('milkkit_send')}}" class="nav-link">Request Milk Kit</a>
-                </li>
+                
+                    <a href="{{Route('milkkit_send')}}" class="btn btn-teal-sm-outline mt-1">Schedule A Pickup</a>
+               
 
                 @endif
-                
-                <li class="nav-item ">
-                    <a class="nav-link" href="{{ route('logout') }}"
+           
+                 <a class="btn btn-teal-sm mt-1  ml-3" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }} 
@@ -39,9 +36,6 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                </li>
-                
-            </ul>
         </div>
     </div>
 </div>
