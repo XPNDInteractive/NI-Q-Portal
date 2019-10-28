@@ -203,8 +203,8 @@ class ViewController extends Controller
             ];
         }
 
-        $page['fields']['donors'] = [
-            'name' => 'donors',
+        $page['fields']['users'] = [
+            'name' => 'users',
             'type' => 'checkbox-select',
             'label' => "Users Assigned",
             'helper' => 'The name you want the page to be titled',
@@ -212,7 +212,7 @@ class ViewController extends Controller
         ];
 
         foreach(User::all() as $perm){
-            $page['fields']['donors']['options'][] = [
+            $page['fields']['users']['options'][] = [
                 'name' => $perm->name,
                 'value' => $perm->id,
                 'selected' => !is_null($menu->users()->where('user_form.user_id', $perm->id)->where('user_form.action', 'assign')->first()) ? true:false
