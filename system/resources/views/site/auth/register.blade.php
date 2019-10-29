@@ -14,7 +14,7 @@
         <div class=" p-md-5">
 
             <h3 class=" w-50 mx-auto font-weight-light text-center  mb-5">Create <span class="font-weight-bold">Account</span></h3>
-            <div style="background:#edf1f2;" class="w-50 mx-auto answer  p-5">
+            <div style="background:#edf1f2;" class="col-md-6 mx-auto answer  p-md-5">
                 <h5 class=" p-3">Please fill out each field below to get started!</h5>
                 <p class="mb-4 px-3">We thank you for your interest in becoming a NI-Q Donor.  Please answer each question as accuratly as you can and we look forward to working with you!.</p>
                 @if($errors->count() > 0)
@@ -26,7 +26,7 @@
                     </div>
                 @endif
                 
-                 <form class="px-3" method="POST" action="{{ route('register') }}">
+                 <form class="px-md-3" method="POST" action="{{ route('register') }}">
                         @csrf
                         
 

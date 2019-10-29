@@ -16,11 +16,11 @@
     <div class="container py-5">
         <div class=" p-md-5">
             <h3 class="m-0 text-center font-weight-bold pb-5 mb-3">{!!$title!!}</h3>
-            <div class="w-75 mx-auto mb-3 ">
+            <div class="col-md-8 mx-auto mb-3 ">
                     <h4 class="font-weight-bold">Question {{$current_question_number}} of {{$question_total}}</h4>
                     <p>Please answer each question to the best of your knowledge.  We take great pride in providing a simple but effective process to ensure we work with moms who understand our mission of providing high quality breast milk that is throughly tested and trusted.</p>
                 </div>
-            <div style="background:#edf1f2;" class="w-75 mx-auto answer p-5">
+            <div style="background:#edf1f2;" class="col-md-8 mx-auto answer p-5">
                 
                 @if($errors->count() > 0)
                     <div class="alert alert-danger rounded-0 alert-dismissible fade show" role="alert">
