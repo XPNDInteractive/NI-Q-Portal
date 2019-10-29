@@ -360,16 +360,24 @@ class PublicFormController extends Controller
 
     public function thankyou(Request $request){
         $page = $this->getPage($request);
+        $page['ty_title'] = \App\Setting::where('name', 'Completed Donor Title')->first()->value;
+        $page['ty_message'] = \App\Setting::where('name', 'Completed Donor Message')->first()->value;
         return view($page['template'], $page);
     }
 
     public function disqualified(Request $request){
         $page = $this->getPage($request);
+        $page['disqualified_title'] = \App\Setting::where('name', 'Disqualified Donor Title')->first()->value;
+        $page['disqualified_message'] = \App\Setting::where('name', 'Disqualified Donor Message')->first()->value;
         return view($page['template'], $page);
     }
 
     public function waitlisted(Request $request){
         $page = $this->getPage($request);
+        $page['wait_title'] = \App\Setting::where('name', 'Wait Listed Donor Title')->first()->value;
+        $page['wait_message'] = \App\Setting::where('name', 'Wait Listed Donor Message')->first()->value;
+        $submission = FormSubmission::where('user_id', $request->user()->id)->where('form_id', 1)->first();
+        $page['time'] = $submission->waited_time;
         return view($page['template'], $page);
     }
 

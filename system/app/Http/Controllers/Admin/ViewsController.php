@@ -39,6 +39,18 @@ class ViewsController extends Controller
             
         $page = $this->getPage($request);
         //$page['sidebarHide'] = true;
+        
+        return view($page['template'], $page);
+    }
+
+    public function settings(Request $request)
+    {
+        
+        
+            
+        $page = $this->getPage($request);
+        $page['settings'] = \App\Setting::all();
+        $page['form_action_route'] = '';
         return view($page['template'], $page);
     }
 

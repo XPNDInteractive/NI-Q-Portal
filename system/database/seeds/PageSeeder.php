@@ -497,7 +497,14 @@ class PageSeeder extends Seeder
  
          //END MESSAGES
 
-
+         $page = new Page();
+         $page->page_type_id = PageType::where('name', 'admin')->first()->id;
+         $page->title = "Settings";
+         $page->slug = 'admin/settings';
+         $page->template = 'admin.settings';
+         $page->active = true;
+         $page->save();
+         $page->permissions()->attach(Permission::where('name', 'admin')->first()->id);
 
 
 

@@ -40,6 +40,9 @@ Route::post('/messages/create', 'MessageController@create')->name('messages.crea
 
 Route::get('/admin', 'Admin\ViewsController@dashboard')->name('admin');
 
+Route::get('/admin/settings', 'Admin\Settings\ViewController@list')->name('admin.settings');
+Route::post('/admin/settings/save', 'Admin\Settings\ActionController@save')->name('admin.settings.save');
+
 Route::get('/admin/forms', 'Admin\ViewsController@forms')->name('admin.forms');
 
 Route::get('/admin/shipping', 'Admin\Shipping\ViewController@list')->name('admin.shipping');
