@@ -79,12 +79,25 @@
                         @elseif($field->question_field_type_id->id == 5)
                             <div class="form-group">
                                 @php      
-                                    $options = explode(",", rtrim($field->options, ','));
-                                    foreach($options as $k => $v){
-                                        $options[$k] = str_replace(' ', '', $v);
+                                    $_options = explode(",", rtrim($field->options, ','));
+                                    $options = [];
+                                    foreach($_options as $k => $v){
+                                       
+                                        if(preg_match("/\:/", $v)){
+                                            $v = str_replace(' ', '', $v);
+                                            $p = explode(":", $v);
+                                            $options[$p[0]] = $p[1]; 
+                                        }
+
+                                        else{
+                                            $v = str_replace(' ', '', $v);
+                                            $options[$v] = $v;
+                                        }
+
+                                       
                                     }
 
-                                    
+                                     dd($options);
                                 @endphp
                                 <label>{{$field->label}}</label>
                                 <select class="form-control {{$errors->has($field->name) ? 'is-invalid':''}}" name="{{$field->name}}">

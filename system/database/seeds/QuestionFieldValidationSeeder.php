@@ -36,6 +36,14 @@ class QuestionFieldValidationSeeder extends Seeder
         $qfv->name = "file";
         $qfv->save();
 
+        $qfv = new QuestionFieldValidation();
+        $qfv->name = "min";
+        $qfv->save();
+
+        $qfv = new QuestionFieldValidation();
+        $qfv->name = "max";
+        $qfv->save();
+
         
     }
 }
