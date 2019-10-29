@@ -14,7 +14,7 @@
 @include('site.blocks.donor-nav')
 
 <div class="bg-white py-5">
-    <div class="container p-5 bg-light  border">
+    <div class="container py-5 p-md-5 bg-light  border">
         
          @if(Session::has('success'))
            
@@ -153,7 +153,7 @@
               
                 @endif
              </div>
-            <div class="col-6 p-1">
+            <div class="col-md-6 p-1">
                 <div class=" bg-white  border  p-5 row m-0 align-items-center justify-content-start">
                    <h6 class="font-weight-light m-0"> Your <span class="font-weight-bold">Notifications</span></h6>
                     <div class="w-100 mt-4 ">
@@ -169,7 +169,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 p-1">
+            <div class="col-md-6 p-1">
                 <div class=" bg-white text-dark border  p-5 row m-0 align-items-center justify-content-start">
                    <h6 class="font-weight-light m-0"> Your <span class="font-weight-bold">Messages</span></h6>
                     <div class="w-100 mt-4 ">

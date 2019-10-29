@@ -27,7 +27,7 @@
 
                 @endif
            
-                 <a class="btn btn-teal-sm mt-1  ml-3" href="{{ route('logout') }}"
+                 <a class="btn btn-teal-sm mt-1  ml-3 mr-2 mr-md-0" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }} 
