@@ -294,30 +294,40 @@ class FormTableSeeder extends Seeder
         //---------------------------------------------------------
         $question = new Question();
         $question->form_id = $form->id;
-        $question->question = "<h5>What is your babies date of birth?</h5>";
+        $question->question = "<h5>Is your baby older than 3 months?</h5>";
         $question->order = 4;
         $question->active = true;
         $question->save();
 
         $field = new QuestionField();
         $field->question_id = $question->id;
-        $field->question_field_type_id = QuestionFieldType::where('name', 'text')->first()->id;
-        $field->name = "baby_date_of_birth";
-        $field->value = null;
-        $field->label = "Date Of Birth";
+        $field->question_field_type_id = QuestionFieldType::where('name', 'radio')->first()->id;
+        $field->name = "baby_older_than_3_months";
+        $field->value = 'yes';
+        $field->label = "Yes";
         $field->options = NULL;
         $field->download = NULL;
         $field->save();
         $field->validations()->attach(QuestionFieldValidation::where('name', 'required')->first()->id);
-        $field->validations()->attach(QuestionFieldValidation::where('name', 'date')->first()->id);
 
-        $fm = new FormQuestionMap();
-        $fm->form_id = $form->id;
-        $fm->question_id = $question->id;
-        $fm->field_id = $field->id;
-        $fm->table = "donors";
-        $fm->column = "date_of_birth";
-        $fm->save();
+        $field = new QuestionField();
+        $field->question_id = $question->id;
+        $field->question_field_type_id = QuestionFieldType::where('name', 'radio')->first()->id;
+        $field->name = "baby_older_than_3_months";
+        $field->value = 'no';
+        $field->label = "No";
+        $field->options = NULL;
+        $field->download = NULL;
+        $field->save();
+        $field->validations()->attach(QuestionFieldValidation::where('name', 'required')->first()->id);
+       
+
+        $qc = new QuestionCondition();
+        $qc->field_id = $field->id;
+        $qc->question_condition_type_id = QuestionConditionType::where('name', "Value Equals")->first()->id;
+        $qc->question_condition_action_id = QuestionConditionAction::where('name', "Wait 90 days")->first()->id;
+        $qc->condition = "No";
+        $qc->save();
 
         //----------------------------------------------------------------
 

@@ -199,8 +199,11 @@ class PublicFormController extends Controller
                 if($request->has($fieldName)){
                     foreach($condition as $con){
                         if($request->input($fieldName) === $con->condition){
-                            if($con->actions()->first()->name == "disqualify"){
+                           
+                            if($con->actions()->first()->name == "Disqualify"){
+                              
                                 $disqualified = true;
+                                break;
                             }
 
                             else{
@@ -238,6 +241,8 @@ class PublicFormController extends Controller
                             }
                             
                         }
+
+                        
                     }
                 }
             }
@@ -290,6 +295,8 @@ class PublicFormController extends Controller
             $fs->user_id = $request->user()->id;
             $fs->save();
         }
+
+        
 
         if($disqualified){
             $fs->blocked = true;
