@@ -97,7 +97,7 @@
                                        
                                     }
 
-                                     dd($options);
+                                    
                                 @endphp
                                 <label>{{$field->label}}</label>
                                 <select class="form-control {{$errors->has($field->name) ? 'is-invalid':''}}" name="{{$field->name}}">
