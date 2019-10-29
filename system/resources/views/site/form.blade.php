@@ -101,8 +101,8 @@
                                 @endphp
                                 <label>{{$field->label}}</label>
                                 <select class="form-control {{$errors->has($field->name) ? 'is-invalid':''}}" name="{{$field->name}}">
-                                  @foreach ($options as $option)
-                                      <option>{{$option}}</option>
+                                  @foreach ($options as $val => $option)
+                                      <option value="{{$val}}">{{$option}}</option>
                                   @endforeach
                                 </select>
                                   @if($errors->has($field->name))
