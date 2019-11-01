@@ -26,5 +26,10 @@ class FormTypeTableSeeder extends Seeder
         $formType->name = "admin";
         $formType->active = true;
         $formType->save();
+
+        $formType = new FormType();
+        $formType->name = "Lab";
+        $formType->active = true;
+        $formType->save();
     }
 }

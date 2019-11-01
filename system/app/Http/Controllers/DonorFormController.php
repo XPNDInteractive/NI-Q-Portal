@@ -36,7 +36,7 @@ class DonorFormController extends Controller
             abort(404, 'No Form');
         }
 
-        elseif($form->form_type_id !== FormType::where('name', 'donor')->first()->id || $form->form_type_id !== FormType::where('name', 'Lab')->first()->id){
+        elseif($form->form_type_id !== FormType::where('name', 'donor')->first()->name && $form->form_type_id !== FormType::where('name', 'Lab')->first()->name){
             abort(404, 'No Form');
         }
 
