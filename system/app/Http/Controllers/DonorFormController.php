@@ -29,10 +29,14 @@ class DonorFormController extends Controller
         $name = $request->query('name');
         $_question = $request->query('id');
         
-        $formTypePublic = FormType::where('name', 'donor')->first();
-        $form = Form::where('name', $name)->where('form_type_id', $formTypePublic->id)->where('active', true)->first();
+        $form = Form::where('name', $name)->where('active', true)->first();
+
 
         if(is_null($form)){
+            abort(404, 'No Form');
+        }
+
+        elseif($form->form_type_id !== FormType::where('name', 'donor')->first()->id || $form->form_type_id !== FormType::where('name', 'Lab')->first()->id){
             abort(404, 'No Form');
         }
 
