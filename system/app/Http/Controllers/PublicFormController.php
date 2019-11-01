@@ -120,7 +120,7 @@ class PublicFormController extends Controller
         $validator = Validator::make($request->all(), [
             'question' => ['required', 'numeric'],
             'form' => ['required', 'string'],
-            'condition_date' => ['sometimes', 'date']
+           
         ]);
 
         if ($validator->fails()) {
