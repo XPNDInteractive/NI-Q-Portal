@@ -339,6 +339,7 @@ class ViewController extends Controller
                     $answer = QuestionAnswer::where('form_id', $form->id)
                     ->where('question_id', $question->id)
                     ->where('field_id', $field->id)
+                    ->where('user_id', $submission->user_id->id)
                     ->first();
 
 
