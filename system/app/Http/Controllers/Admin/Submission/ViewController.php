@@ -418,7 +418,7 @@ class ViewController extends Controller
                 "Notes"=> ""
             ]);
     
-            $api->post('api/donor/'.$donor->id.'/mailingaddress', [
+            $api->post('api/donor/'.$donor->donor_number.'/mailingaddress', [
                 "DonorId"=> $donor->donor_number,
                 "DonorUrl"=> null,
                 "Address1"=> $donor->mailing_address,
@@ -428,7 +428,7 @@ class ViewController extends Controller
                 "Zipcode"=> $donor->mailing_zipcode
             ]);
     
-            $api->post('api/donor/'.$donor->id.'/shippingaddress', [
+            $api->post('api/donor/'.$donor->donor_number.'/shippingaddress', [
                 "DonorId"=> $donor->donor_number,
                 "DonorUrl"=> null,
                 "Address1"=> $donor->shipping_address,
