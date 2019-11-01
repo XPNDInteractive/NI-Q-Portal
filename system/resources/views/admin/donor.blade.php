@@ -30,7 +30,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="">Donor ID</td>
-                                        <td>{{$donor->id}}</td>
+                                        <td>{{$donor->donor_number}}</td>
                                     </tr>
                                     <tr>
                                         <td class="">First Name</td>
