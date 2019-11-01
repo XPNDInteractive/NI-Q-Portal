@@ -361,6 +361,7 @@ class ViewController extends Controller
             foreach($insert as $table => $col){
                 $col['active'] = true;
                 $col['user_id'] =  $submission->user_id->id;
+                $col['donor_number'] = \uniqid();
                 $col['created_at'] = now();
                 $col['updated_at'] = now();
                 $inserted = \DB::table($table)->insert($col);
@@ -403,7 +404,7 @@ class ViewController extends Controller
             $api = new DonorAPI('https://donortrack.ni-q.com:443/', 'api1', 'Api1Rand0M');
             $api->post('api/donor', [
                 "Url"=> "",
-                "DonorId"=> $donor->id,
+                "DonorId"=> $donor->donor_number,
                 "FirstName"=> $donor->user_id->first_name,
                 "LastName"=> $donor->user_id->last_name,
                 "DateOfBirth"=> $donor->date_of_birth,
@@ -417,7 +418,7 @@ class ViewController extends Controller
             ]);
     
             $api->post('api/donor/'.$donor->id.'/mailingaddress', [
-                "DonorId"=> $donor->id,
+                "DonorId"=> $donor->donor_number,
                 "DonorUrl"=> null,
                 "Address1"=> $donor->mailing_address,
                 "Address2"=> $donor->mailing_address2,
@@ -427,7 +428,7 @@ class ViewController extends Controller
             ]);
     
             $api->post('api/donor/'.$donor->id.'/shippingaddress', [
-                "DonorId"=> $donor->id,
+                "DonorId"=> $donor->donor_number,
                 "DonorUrl"=> null,
                 "Address1"=> $donor->shipping_address,
                 "Address2"=> $donor->shipping_address2,

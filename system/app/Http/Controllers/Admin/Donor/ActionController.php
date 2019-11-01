@@ -56,6 +56,7 @@ class ActionController extends Controller
         else{
             $user = new \App\Donor();
             $user->user_id = $request->input('user');
+            $user->donor_number = \uniqid();
             $user->date_of_birth = $request->input('date_of_birth');
             $user->mailing_address= $request->input('mailing_address');
             $user->mailing_address2= $request->input('mailing_address2');
@@ -185,8 +186,9 @@ class ActionController extends Controller
 
     public function delete(Request $request){
         $form = Donor::where('id', $request->query('id'))->firstOrFail();
-        $form->delete();
-        return redirect()->route('admin.donors')->with('success', 'Successfully deleted Donor', $form->id);
+        $form->active = false;
+        $form->update();
+        return redirect()->route('admin.donors')->with('success', 'Successfully inactivated Donor', $form->id);
      }
 
 
