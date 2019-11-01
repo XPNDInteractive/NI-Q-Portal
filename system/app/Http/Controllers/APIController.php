@@ -93,10 +93,10 @@ class APIController extends Controller
             $donor = \App\Donor::where('donor_number', $mk->DonorId)->first();
             
             if(!is_null($donor)){
-                $m = \App\Bloodkit::where('donor_id', $donor->id)->where("din", $mk->Din)->first();
+                $m = \App\BloodKit::where('donor_id', $donor->id)->where("din", $mk->Din)->first();
 
                 if(is_null($m)){
-                    $m = new \App\Bloodkit();
+                    $m = new \App\BloodKit();
                     $m->donor_id = $donor->id;
                     $m->active = $mk->Active;
                     $m->din = $mk->Din;
