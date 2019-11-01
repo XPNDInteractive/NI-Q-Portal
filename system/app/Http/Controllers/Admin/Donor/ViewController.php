@@ -210,6 +210,7 @@ class ViewController extends Controller
             'value' => old('consent_form')
         ];
 
+
         $page['fields'][] = [
             'name' => 'notes',
             'type' => 'textarea',

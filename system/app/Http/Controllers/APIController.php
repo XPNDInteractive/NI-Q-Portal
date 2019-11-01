@@ -28,14 +28,14 @@ class APIController extends Controller
         $milkKits = $api->get('api/MilkKit');
 
         foreach($milkKits as $mk){
-            $donor = \App\Donor::where('id', $mk->DonorId)->first();
+            $donor = \App\Donor::where('donor_number', $mk->DonorId)->first();
             
             if(!is_null($donor)){
-                $m = \App\MilkKit::where('donor_id', $mk->DonorId)->where('barcode', $mk->Barcode)->first();
+                $m = \App\MilkKit::where('donor_id', $donor->id)->where('barcode', $mk->Barcode)->first();
 
                 if(is_null($m)){
                     $m = new \App\MilkKit();
-                    $m->donor_id = $mk->DonorId;
+                    $m->donor_id= $donor->id;
                     $m->active = $mk->Active;
                     $m->barcode = $mk->Barcode;
                     $m->volume = $mk->Volume;
@@ -60,7 +60,7 @@ class APIController extends Controller
                 }
 
                 else{
-                    $m->donor_id = $mk->DonorId;
+                    $m->donor_id = $donor->id;
                     $m->active = $mk->Active;
                     $m->barcode = $mk->Barcode;
                     $m->volume = $mk->Volume;
@@ -90,14 +90,14 @@ class APIController extends Controller
 
         $milkKits = $api->get('api/BloodKit');
         foreach($milkKits as $mk){
-            $donor = \App\Donor::where('id', $mk->DonorId)->first();
+            $donor = \App\Donor::where('donor_number', $mk->DonorId)->first();
             
             if(!is_null($donor)){
-                $m = \App\Bloodkit::where('donor_id', $mk->DonorId)->where("din", $mk->Din)->first();
+                $m = \App\Bloodkit::where('donor_id', $donor->id)->where("din", $mk->Din)->first();
 
                 if(is_null($m)){
                     $m = new \App\Bloodkit();
-                    $m->donor_id = 1;
+                    $m->donor_id = $donor->id;
                     $m->active = $mk->Active;
                     $m->din = $mk->Din;
                     $m->order_date = $mk->OrderDate;
@@ -109,7 +109,7 @@ class APIController extends Controller
                 }
 
                 else{
-                    $m->donor_id = $mk->DonorId;
+                    $m->donor_id = $donor->id;
                     $m->active = $mk->Active;
                     $m->din = $mk->Din;
                     $m->order_date = $mk->OrderDate;
@@ -123,7 +123,7 @@ class APIController extends Controller
             }
         }
 
-        return redirect()->route('admin');
+        return redirect()->route('admin')->with('Success', 'API SUCCESSFULLY PULLED');
     }
 
 }
