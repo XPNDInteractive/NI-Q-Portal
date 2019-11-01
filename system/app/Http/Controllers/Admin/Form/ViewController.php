@@ -39,7 +39,7 @@ class ViewController extends Controller
                 'Status' => 'active',
                 'Created Date' => 'created_at'
             ],
-            'rows' => Form::all()
+            'rows' => Form::where('form_type_id', '!=', 4)->get()
         ];
 
         $page['list_actions'] = '/list-table-actions-form';
