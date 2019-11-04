@@ -410,8 +410,10 @@ class ViewController extends Controller
                  Ni-Q requires these forms filled out. At the end of the year, Ni-Q will provide you with a 1099 form. It will be your responsibility to incorporate this in filing your taxes.
                  Thank you for choosing to donate with Ni-Q! \n <a href='https://portal.ni-q.com'>Click here to login into your donor account!</a>",
                 'From: erica@ni-q.com' . "\r\n" .
-                    'Reply-To: erica@ni-q.com' . "\r\n" .
-                    'X-Mailer: PHP/' . phpversion()
+                'Reply-To: erica@ni-q.com' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion()."\r\n".
+                'MIME-Version: 1.0' . "\r\n".
+                'Content-type: text/html; charset=iso-8859-1' . "\r\n"
             );
 
 
