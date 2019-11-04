@@ -69,7 +69,7 @@ class PublicFormController extends Controller
         $thankyou = false;
        
         if(!is_null($answer)){
-            $qs = Question::orderBy('order')->get();
+            $qs = Question::where('form_id', $form->id)->orderBy('order')->get();
             foreach($qs as $k => $q){
                 if($q->id == $nextQ){
                     if(isset($qs[$k + 1])){
