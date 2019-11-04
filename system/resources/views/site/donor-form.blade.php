@@ -35,7 +35,7 @@
                     <input type="hidden" name="form" value="{{$title}}"/>
                     <input type="hidden" name="question" value="{{$question->id}}"/>
                     @php $conditions = []; @endphp
-                   @foreach($question->fields()->get() as $k => $field)
+                   @foreach($question->fields()->orderBy('id')->get() as $k => $field)
                         
                         @if($field->question_field_type_id->id == 1)
                             <div class="form-group">
