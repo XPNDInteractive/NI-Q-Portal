@@ -88,6 +88,7 @@ class ActionController extends Controller
                         $fields->name =  $field['name'];
                         $fields->label = $field['label'];
                         $fields->value = $field['value'];
+                        $fields->field_order = $field['order'];
                         
 
                         if(isset($field['options'])){
@@ -204,6 +205,7 @@ class ActionController extends Controller
                         $fields->name =  $field['name'];
                         $fields->label = $field['label'];
                         $fields->value = $field['value'];
+                        $fields->field_order = $field['order'];
                         
 
                         if(isset($field['options'])){

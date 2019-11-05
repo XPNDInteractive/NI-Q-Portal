@@ -145,6 +145,7 @@
                                         <input class="col-2 form-control form-control-sm" type="text" name="" value="" placeholder="value"/>
                                         <input class="col form-control form-control-sm d-none" type="text" name="" value="" placeholder="options"/>
                                         <input class="col form-control form-control-sm d-none" type="file" name="" value="" placeholder="file"/>
+                                        <input class="col form-control form-control-sm col-1 ml-1" type="number" name="order" value="0" placeholder="order"/>
                                         <button type="button" class="btn text-danger btn-sm ml-1 delete-field"><i class="fas fa-times"></i></button>
 
                                         <div class="col-12 validations p-3 ">
@@ -201,6 +202,7 @@
                                                 @if(isset($f['file']))
                                                 <input class="col form-control form-control-sm d-none" type="file" name="fields[{{$k}}][file]" value="{{$f['file']}}" placeholder="file"/>
                                                 @endif
+                                                <input class="col form-control form-control-sm col-1 ml-1" type="number" name="fields[{{$k}}][order]" value="0" placeholder="order"/>
                                                 <button type="button" class="btn text-danger btn-sm ml-1 delete-field"><i class="fas fa-times"></i></button>
                                                  @if($errors->has('fields.' . $k))
                                                     <span class="invalid-feedback ml-4" role="alert">
@@ -265,7 +267,9 @@
                                                 <input class="col form-control form-control-sm d-none" type="text" name="fields[{{$k+1}}][options]" value="{{$f['options']}}" placeholder="options"/>
                                                 @if(isset($f['file']))
                                                 <input class="col form-control form-control-sm d-none" type="file" name="fields[{{$k+1}}][file]" value="{{$f['file']}}" placeholder="file"/>
+                                                
                                                 @endif
+                                                <input class="col form-control form-control-sm col-1 ml-1" type="number" name="fields[{{$k+1}}][order]" value="{{$f['field_order']}}" placeholder="order"/>
                                                 <button type="button" class="btn text-danger btn-sm ml-1 delete-field"><i class="fas fa-times"></i></button>
                                                  @if($errors->has('fields.' . ($k + 1)))
                                                     <span class="invalid-feedback ml-4" role="alert">

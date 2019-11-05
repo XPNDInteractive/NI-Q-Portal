@@ -22,6 +22,7 @@ class CreateQuestionFieldsTable extends Migration
             $table->string('label')->nullable();
             $table->longText('options')->nullable();
             $table->string('download')->nullable();
+            $table->integer('field_order')->default(0);
             $table->timestamps();
         });
     }
